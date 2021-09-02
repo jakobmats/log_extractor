@@ -22,7 +22,7 @@ describe LogExtractor::Counter do
     expect(visits.first.count).to eq 2
   end
 
-  it "counts various visits" do
+  it "counts differing visits" do
     counter = LogExtractor::Counter.new([
                                           LogExtractor::Entry.new("/contact", "682.704.613.213"),
                                           LogExtractor::Entry.new("/about/2", "555.576.836.194"),

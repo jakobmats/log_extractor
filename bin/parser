@@ -9,7 +9,7 @@ uniq = false
 OptionParser.new do |opts|
   opts.banner = "Usage: parser [options] [file]"
 
-  opts.on("-u", "--uniq") { uniq = true }
+  opts.on("-u", "--uniq", "Counts only unique visits") { uniq = true }
 end.parse!
 
 file_name = ARGV.pop
