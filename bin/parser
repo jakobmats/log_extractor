@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require_relative "../lib/log_extractor"
+
+uniq = false
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: parser [options] [file]"
+
+  opts.on("-u", "--uniq") { uniq = true }
+end.parse!
+
+file_name = ARGV.pop
+raise "File name is required" if file_name.nil?
+
+contents = File.read(file_name)
+
+parser = LogExtractor::Parser.new
+entries = contents.split("\n").map { |l| parser.parse(l) }
+
+counter = LogExtractor::Counter.new(entries)
+
+if uniq
+  puts counter.uniq_visits
+else
+  puts counter.visits
+end
